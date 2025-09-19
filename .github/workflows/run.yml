@@ -1,14 +1,15 @@
 name: Run OCR
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # still allows manual runs
+  schedule:
+    - cron: "*/5 * * * *"   # every 5 minutes
 
 jobs:
   run-ocr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -19,11 +20,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Install Tesseract
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y tesseract-ocr
 
       - name: Run OCR script
         env:
