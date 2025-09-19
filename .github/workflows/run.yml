@@ -1,14 +1,11 @@
-name: Run Passenger Forecast OCR
+name: Run OCR
 
 on:
-  schedule:
-    - cron: "*/15 * * * *"   # runs every 15 minutes
-  workflow_dispatch:         # allows manual runs too
+  workflow_dispatch:
 
 jobs:
   run-ocr:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -23,8 +20,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Tesseract
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+
       - name: Run OCR script
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        run: |
-          python main.py
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+        run: python main.py
