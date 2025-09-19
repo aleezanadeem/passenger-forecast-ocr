@@ -1,0 +1,7 @@
+opencv-python-headless
+pytesseract
+pandas
+gspread
+gspread-dataframe
+google-auth
+google-api-python-client
