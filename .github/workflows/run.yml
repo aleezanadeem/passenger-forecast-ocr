@@ -4,7 +4,6 @@ name: Run OCR
 on:
   schedule:
     - cron: "*/2 * * * *"   # every 15 minutes
-  workflow_dispatch:         # still allow manual runs
 
 
 jobs:
