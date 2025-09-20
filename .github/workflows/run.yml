@@ -1,8 +1,11 @@
 name: Run OCR
+
+
 on:
-  workflow_dispatch:   # allows manual runs
-  schedule:            # enables cron schedule
+  schedule:
     - cron: "*/2 * * * *"   # every 15 minutes
+  workflow_dispatch:         # still allow manual runs
+
 
 jobs:
   run-ocr:
